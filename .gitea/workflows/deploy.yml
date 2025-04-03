@@ -1,0 +1,19 @@
+name: Deploy Container
+on: [push]  # Triggers on every git push
+
+jobs:
+  deploy ml:
+    runs-on: ubuntu-latest 
+    steps:
+      - name: Sync repo
+        run: |
+          # set dir as safe
+            docker exec gitea_runner \
+              git config --global --add safe.directory /ml
+          # Fetch repo
+            docker exec gitea_runner \
+              git -C /ml pull "https://phoenix381:${{ secrets.TOKEN }}@projects.root.sx/hackaton/ml.git"
+      
+      - name: Restart ml
+        run: |
+          docker restart vue_app
