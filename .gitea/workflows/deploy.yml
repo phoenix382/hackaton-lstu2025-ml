@@ -12,7 +12,17 @@ jobs:
               git config --global --add safe.directory /ml
           # Fetch repo
             docker exec gitea_runner \
+              git -C /ml fetch "https://phoenix381:${{ secrets.TOKEN }}@projects.root.sx/hackaton/ml.git"
+          # Checkout
+            docker exec gitea_runner \
+              git -C /ml checkout main
+          # Sync repo
+            docker exec gitea_runner \
+              git -C /ml reset --hard origin/main
+          # log
+            docker exec gitea_runner \
               git -C /ml pull "https://phoenix381:${{ secrets.TOKEN }}@projects.root.sx/hackaton/ml.git"
+              # git -C /ml status
       
       - name: Restart ml
         run: |
