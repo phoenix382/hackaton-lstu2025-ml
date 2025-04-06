@@ -21,7 +21,7 @@ jobs:
               git -C /ml reset --hard origin/main
           # log
             docker exec gitea_runner \
-              git -C /ml pull "https://phoenix381:${{ secrets.TOKEN }}@projects.root.sx/hackaton/ml.git"
+              git -C /ml pull --rebase "https://phoenix381:${{ secrets.TOKEN }}@projects.root.sx/hackaton/ml.git"
               # git -C /ml status
       
       - name: Restart ml
