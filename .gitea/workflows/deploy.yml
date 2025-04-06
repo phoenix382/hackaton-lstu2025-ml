@@ -16,4 +16,4 @@ jobs:
       
       - name: Restart ml
         run: |
-          docker restart vue_app
+          docker restart ml_app

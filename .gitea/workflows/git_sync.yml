@@ -1,0 +1,27 @@
+name: Sync to GitHub
+
+on:
+  workflow_dispatch:  # Allows manual triggering via Gitea UI
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Gitea Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetches all history
+
+      - name: Configure Git
+        run: |
+          git config user.name "Phoenix382"
+          git config user.email "d.a.kashirin@bk.ru"
+
+      - name: Add GitHub Remote
+        run: |
+          git remote add github https://${{ secrets.TOKEN_GITHUB }}@github.com/phoenix382/hackaton-lstu2025-ml.git
+
+      - name: Push to GitHub
+        run: |
+          git push --all github  # Push all branches
+          git push --tags github  # Push all tags

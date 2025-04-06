@@ -1,6 +1,8 @@
 fastapi
 uvicorn
-
 pandas
 numpy
 scikit-learn
+
+langchain_huggingface
+langchain_openai
